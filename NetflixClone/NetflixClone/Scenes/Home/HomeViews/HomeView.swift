@@ -14,27 +14,34 @@ struct HomeView: View {
     private var vm = HomeViewModel()
     let screen = UIScreen.main.bounds
     
-
+    init() {
+        print((UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0))
+    }
+    
     //MARK: - Body
     var body: some View {   
         
         ZStack {
             Color.black
                 .ignoresSafeArea(.all)
+            
             ScrollView(.vertical, showsIndicators: false) {
+                
+                
                 //MainVStack    
                 LazyVStack {
                     
-                    ZStack(alignment: .top) {
-                        TopMoviewPreview(movie: exampleMovie1)
-                            .frame(width: screen.width)
-                            .padding(.top, -1 * (UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0) )
+                    TopRowButtons()
 
-                        
-                    }
+                    TopMoviewPreview(movie: exampleMovie1)
+                        .frame(width: screen.width)
+                        .padding(.top,-110)
+                        .zIndex(-1)
+
                     
                     
                     ForEach(vm.allCategories, id: \.self) { category in
+                        
                         VStack {
                             HStack {
                                 Text(category)
@@ -52,10 +59,10 @@ struct HomeView: View {
                                     }
                                 }
                             }//:Scroll
-//                            .padding(.horizontal)
                         }//:VStack
                     }//:Loop
                 }//:MainVStack
+                
             }//:ScrollView
         }//:ZStack
         .foregroundColor(.white)
@@ -65,5 +72,54 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+            .preferredColorScheme(.dark)
+    }
+}
+
+struct TopRowButtons: View {
+    var body: some View {
+        HStack {
+            
+            
+            
+            Button(action: {}) {
+                Image(Constants.Images.logo)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 50)
+            }//:Button
+            .buttonStyle(PlainButtonStyle())
+            
+            
+            
+            
+            
+            Spacer()
+            
+            Button(action: {}) {
+                Text("TV Shows")
+            }//:Button
+            .buttonStyle(PlainButtonStyle())
+            
+            Spacer()
+            
+            Button(action: {}) {
+                Text("Movies")
+            }//:Button
+            .buttonStyle(PlainButtonStyle())
+            
+            Spacer()
+            
+            Button(action: {}) {
+                Text("My List")
+            }//:Button
+            .buttonStyle(PlainButtonStyle())
+            
+            
+            
+        }//:HStack
+        
+        .padding(.leading, 10)
+        .padding(.trailing, 30)
     }
 }

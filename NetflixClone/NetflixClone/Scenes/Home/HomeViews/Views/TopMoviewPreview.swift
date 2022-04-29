@@ -58,8 +58,8 @@ struct TopMoviewPreview: View {
                     }
                     Spacer()
                     
-                    WhiteButton(text: "Play", imageName: "play.fill") {
-                        
+                    PlayButton {
+
                     }
                     .frame(width: 120)
                     
@@ -78,6 +78,8 @@ struct TopMoviewPreview: View {
                 LinearGradient.blackOpacityGradient
                     .padding(.top, 250)
             )
+            
+            .background(LinearGradient.blackOpacityGradientAtTop.padding(.bottom, 260))
             
         }//:ZStack
         .foregroundColor(.white)

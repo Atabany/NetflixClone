@@ -10,8 +10,7 @@ import Kingfisher
 
 
 struct StandardHomeMovie: View {
-    
-    
+
     let movie: Movie
     
     var body: some View {
