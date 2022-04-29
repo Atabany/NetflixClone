@@ -50,8 +50,16 @@ struct MovieDetail: View {
                             print("play")
                         }
                         
+                        // Episode Information
+                        CurrentEpisodeInformation(movie: movie)
+                        
+                        //CAST-Creators
+                        CastInfoView(movie: movie)
+                        
+                        
                         
                     }//:VStack
+                    .padding(.horizontal, 10)
                 }//:ScrollView
                 
                 Spacer()
@@ -118,5 +126,68 @@ struct HDView: View {
 struct MovieDetail_Previews: PreviewProvider {
     static var previews: some View {
         MovieDetail(movie: exampleMovie2)
+    }
+}
+
+struct CastInfoView: View {
+    
+    let movie: Movie
+    
+    var body: some View {
+        VStack(spacing: 3) {
+            //CAST
+            HStack {
+                Text("Cast: \(movie.cast)")
+                    .font(.subheadline)
+                    .lineLimit(4)
+                
+                Spacer()
+            }//:HStack
+            
+            
+            //Creators
+            HStack {
+                Text("Creators: \(movie.creators)")
+                    .font(.subheadline)
+                    .lineLimit(4)
+                
+                Spacer()
+            }//:HStack
+            
+            
+        }
+        .padding(.vertical,10)
+        .font(.caption)
+        .foregroundColor(.gray)
+    }
+}
+
+struct CurrentEpisodeInformation: View {
+    
+    let movie: Movie
+    
+    var body: some View {
+        Group {
+            // Current Episode Information
+            HStack {
+                Text(movie.episodeInfoDisplay)
+                    .font(.headline)
+                    .bold()
+                
+                Spacer()
+            }//:HStack
+            .padding(.vertical, 4)
+            
+            
+            // Current Episode Description
+            HStack {
+                Text(movie.episodeDescriptionDisplay)
+                    .font(.subheadline)
+                    .lineLimit(4)
+                
+                Spacer()
+            }//:HStack
+            
+        }
     }
 }
